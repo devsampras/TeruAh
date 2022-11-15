@@ -1,14 +1,10 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+using CustomAuthentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
-{
-    options.Cookie.Name = "MyCookieAuth";
-    options.LoginPath="/Home/Login";
-});
+builder.Services.AddSimpleAuthorization();
 
 builder.Services.AddControllersWithViews();
 
