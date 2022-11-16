@@ -1,10 +1,12 @@
 @{
+    ViewBag.title="Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <form method="POST">
     <label>User</label>
-    <input type="text" name="user"/>
-    <label>Password</label>
-    <input type="password" name="password"/>
+    <input type="text" name="user" required/>
+    <label>Passwords</label>
+    <input type="password" name="password" required/>
     <input type="submit"/>
 </form>

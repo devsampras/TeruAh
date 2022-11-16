@@ -1,26 +1,29 @@
+using System.Collections;
 using System.Security;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 
 namespace CustomAuthentication
 {
-    public class CustomIdentity
+    public static class CustomIdentity
     {
-        public async Task<bool> ExecuteAuthentication(Microsoft.AspNetCore.Http.HttpContext current, string user, string password)
+        public static async Task<bool> SignIn(this Microsoft.AspNetCore.Http.HttpContext current, string token,bool remember)
         {
             try
             {
-                if (user == "admin" && password == "123456")
-                {
+                
                     var claims = new List<Claim>(){
-                        new Claim(ClaimTypes.Name,"admin"),
-                        new Claim(ClaimTypes.Email,"admin@test.it")
+                        new Claim("token",token)
                     };
                     var identity = new ClaimsIdentity(claims, Misc.cookiename);
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
+                    var authProperties=new AuthenticationProperties {
+                        IsPersistent=remember
+                    };
+
                     await current.SignInAsync(Misc.cookiename, principal);
-                }
+                
             }
             catch (Exception ex)
             {
@@ -28,19 +31,30 @@ namespace CustomAuthentication
             }
             return true;
         }
-
+         public static async Task<bool> SignOut(this Microsoft.AspNetCore.Http.HttpContext current){
+            
+            await current.SignOutAsync(Misc.cookiename);
+            return true;
+         }
     }
     public static class Misc
     {
         internal static string cookiename{get;set;}=string.Empty;
-        public static void AddSimpleAuthorization(this IServiceCollection s,string name="simpleauth")
+        public static IServiceCollection AddSimpleAuthentication(this IServiceCollection s,string name="simpleauth")
         {
+            if(string.IsNullOrWhiteSpace(name)) throw new ArgumentException("name cannot be null, empty or whitespace");
             cookiename=name;
             s.AddAuthentication(cookiename).AddCookie(cookiename, options =>
             {
                 options.Cookie.Name = cookiename;
                 options.LoginPath = "/Home/Login";
             });
+
+            return s;
+        }
+        public static IServiceCollection AddCustomAuthorizationHandler<T>(this IServiceCollection s){
+            
+            return s;
         }
     }
 }
