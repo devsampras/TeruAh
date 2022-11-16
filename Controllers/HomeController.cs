@@ -16,11 +16,10 @@ namespace Teruah.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> Logout()
+        public async void Logout()
         {
             await HttpContext.SignOut();
             Response.Redirect("~/");
-            return View();
         }
         [HttpPost]
         public async Task<ActionResult> Login(string user,string password)
@@ -28,7 +27,7 @@ namespace Teruah.Controllers
             Console.WriteLine($"name: {user} password:{password}");
             try{
               if(user=="user" && password=="123456"){
-              await HttpContext.SignIn(user+password,false);
+              await HttpContext.SignIn(user+password,true);
             Response.Redirect("/");  
             }
             }catch{
