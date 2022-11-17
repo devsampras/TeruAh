@@ -25,7 +25,7 @@ namespace CustomAuthentication
                     await current.SignInAsync(Misc.cookiename, principal);
                 
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

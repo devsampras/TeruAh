@@ -8,8 +8,6 @@ namespace Teruah.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            Console.WriteLine($"IsAuthentcicated: {HttpContext.User.Identity.IsAuthenticated}");
-            Console.WriteLine($"Token: {HttpContext.User.Claims.SingleOrDefault(x=>x.Type=="token").Value}");
             return View();
         }
         public ActionResult Login()
