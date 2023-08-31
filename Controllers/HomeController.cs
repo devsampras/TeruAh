@@ -1,10 +1,13 @@
 using CustomAuthentication;
+using Data;
+using Data.DS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace Teruah.Controllers
 {
     public class HomeController : Controller
     {
+        
         [Authorize]
         public ActionResult Index()
         {
@@ -34,5 +37,10 @@ namespace Teruah.Controllers
             
             return View(new {msg="Username o Password non corretti"});
         }
+
+        public ActionResult Parola(){
+            return View(new ParolaService().GetFullGroupsIndex());
+        }
+        
     }
 }

@@ -1,0 +1,30 @@
+@{
+    ViewBag.title = "Scegli la Parola";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model List<Data.DTO.Gruppo>
+
+
+<div id="groupedBooks" class="accordion-inverse accordion-inset">
+
+@foreach(var g in Model){
+    <div class="accordion-item">
+        <div class="accordion-title collapsed" data-toggle="collapse" data-target="#groupedBooks_g"
+            aria-expanded="false">@g.descrizione
+            <div class="accordion-after">
+                <i class="icon ion-ios-arrow-up"></i>
+            </div>
+        </div>
+        <div id="groupedBooks_g" class="accordion-body collapse" data-parent="#groupedBooks" style="">
+            <div class="accordion-content">
+                <div class="row">
+                    @foreach(var l in g.libri){
+                <div class="custom-grid-item m-1 d-flex justify-content-center align-items-center text-white h-4" style="background:@(g.colore)cc; height:5rem;width:5rem; border-radius:5px;">@l.sigla</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>

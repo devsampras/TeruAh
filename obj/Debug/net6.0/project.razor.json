@@ -16311,6 +16311,11 @@
       "FilePath": "c:\\Users\\luca\\Desktop\\TeruAh\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\luca\\Desktop\\TeruAh\\Views\\Home\\parola.cshtml",
+      "TargetPath": "Views\\Home\\parola.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"
